@@ -1,21 +1,17 @@
 import express, { Router, Request, Response } from 'express';
+import controller from './controller';
 
 const router: Router = express.Router();
 
-router.post('/register', (req: Request, res: Response) => {
-  res.send('Hello, world!');
-});
+// ajoute une commande en fonction de l'id User et Id Restaurant
+router.post('/addOrder', controller.addOrder);
 
-router.post('/login', (req: Request, res: Response) => {
-  res.json('login');
-});
+router.post('/changeOrderState', controller.changeOrderState);
 
-router.delete('/delete/{id}', (req: Request, res: Response) => {
-  res.json('delete');
-});
+router.get('/getOrder/{idOrder}', controller.getOrder);
 
-router.put('/edit/{id}', (req: Request, res: Response) => {
-  res.json('edit');
-});
+router.get('/getAllOrder/user/{idUser}', controller.getUserOrder); 
+
+router.get('/getAllOrder/Restaurant/{idUser}', controller.getRestaurantOrder);
 
 export default router;
