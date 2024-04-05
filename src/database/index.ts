@@ -7,3 +7,19 @@
 // });
 
 // export const Account = model<IAccount>('Account', accountSchema);
+import mongoose from 'mongoose';
+
+export const connectMongoose = () => {
+  mongoose
+    .connect('mongodb://192.168.2.30:32000/', {
+      dbName: 'cesieats-service',
+      user: process.env.DB_USERNAME,
+      pass: process.env.DB_PASSWORD,
+    })
+    .then(() => {
+      console.log('Connected to the database');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
