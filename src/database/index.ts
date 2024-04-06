@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose';
-import { IOrder, IOrderItems } from 'cesieats-service-types/order';
+import { IOrder, IOrderItems } from 'cesieats-service-types/src/order';
 
 const orderSchema = new Schema<IOrder>({
   idRestaurant: { type: String, required: true },
