@@ -29,12 +29,18 @@ const getOrder = async (req: Request, res: Response) => {
   res.status(200).json(result);
 };
 
-const getUserOrder = (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Hello, world!' });
+const getUserOrder = async (req: Request, res: Response) => {
+  const filter = {idClient: (String)(req.query.idClient)};
+  const result = await Order.find(filter);
+  console.log('result: ' + result);
+  res.status(200).json(result);
 };
 
-const getRestaurantOrder = (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Hello, world!' });
+const getRestaurantOrder = async (req: Request, res: Response) => {
+  const filter = {idRestaurant: (String)(req.query.idRestaurant)};
+  const result = await Order.find(filter);
+  console.log('result: ' + result);
+  res.status(200).json(result);
 };
 
 const controller = {
@@ -43,7 +49,6 @@ const controller = {
   getOrder,
   getUserOrder,
   getRestaurantOrder,
-
 };
 
 export default controller;
