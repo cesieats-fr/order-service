@@ -10,8 +10,8 @@ router.post('/updateOrderState', controller.updateOrderState);
 
 router.get('/getOrder/:id', controller.getOrder);
 
-router.get('/getAllOrder/user/:idUser', controller.getUserOrder); 
+router.get('/getAllOrder', controller.getAllOrder); 
 
-router.get('/getAllOrder/Restaurant/:idUser', controller.getRestaurantOrder);
+router.delete('/deleteOrder', controller.deleteOrder);
 
 export default router;
