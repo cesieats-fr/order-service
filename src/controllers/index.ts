@@ -7,7 +7,7 @@ const addOrder = async (req: Request, res: Response) => {
     const order: IOrder = {
       idClient: req.body.idClient,
       idRestaurant: req.body.idRestaurant,
-      itemState: 0,
+      orderState: 0,
       idDelivery: req.body.idDelivery ?? null,
     };
     const result = await Order.create(order);
@@ -22,9 +22,9 @@ const addOrder = async (req: Request, res: Response) => {
 
 const updateOrderState = async (req: Request, res: Response) => {
   try {
-    const update = { itemState: req.body.itemState };
+    const update = { orderState: req.body.orderState };
     const result = await Order.findByIdAndUpdate(req.body.id, update);
-    console.log('itemState: ' + req.body.itemState);
+    console.log('orderState: ' + req.body.orderState);
     console.log('result after update: ' + result);
     res.status(200).json(result);
   }  catch (error) {

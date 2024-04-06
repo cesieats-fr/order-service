@@ -5,7 +5,7 @@ const orderSchema = new Schema<IOrder>({
   idRestaurant: { type: String, required: true },
   idClient: { type: String, required: true },
   idDelivery: { type: String, required: false },
-  itemState: { type: Number, required: true },
+  orderState: { type: Number, required: true },
 });
 
 const orderItemsSchema = new Schema<IOrderItems>({
