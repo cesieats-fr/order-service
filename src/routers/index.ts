@@ -6,7 +6,7 @@ const router: Router = express.Router();
 // ajoute une commande en fonction de l'id User et Id Restaurant
 router.post('/addOrder', controller.addOrder);
 
-router.post('/changeOrderState', controller.changeOrderState);
+router.post('/updateOrderState', controller.updateOrderState);
 
 router.get('/getOrder/:id', controller.getOrder);
 

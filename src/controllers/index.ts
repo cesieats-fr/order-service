@@ -11,18 +11,21 @@ const addOrder = async (req: Request, res: Response) => {
     idDelivery: '0',
   };
   const result = await Order.create(order);
-  console.log(result);
+  console.log('result: ' + result);
   res.status(200).json(result);
 };
 
-//  
-const changeOrderState = async (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Hello, world!' });
+const updateOrderState = async (req: Request, res: Response) => {
+  const update = { itemState: req.body.itemState };
+  const result = await Order.findByIdAndUpdate(req.body.id, update);
+  console.log('result after update: ' + result);
+  res.status(200).json(result);
 };
 
 const getOrder = async (req: Request, res: Response) => {
   const result = await Order.findById(req.query.id);
-  console.log(result);
+  console.log('result: ' + result);
+  console.log('id: ' + req.query.id);
   res.status(200).json(result);
 };
 
@@ -36,12 +39,11 @@ const getRestaurantOrder = (req: Request, res: Response) => {
 
 const controller = {
   addOrder,
-  changeOrderState,
+  updateOrderState,
   getOrder,
   getUserOrder,
   getRestaurantOrder,
 
 };
-
 
 export default controller;
