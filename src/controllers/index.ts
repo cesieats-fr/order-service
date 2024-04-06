@@ -33,9 +33,9 @@ const updateOrderState = async (req: Request, res: Response) => {
 
 const getOrder = async (req: Request, res: Response) => {
   try {
-    const result = await Order.findById(req.query.id);
+    const result = await Order.findById(req.params.id);
     console.log('result: ' + result);
-    console.log('id: ' + req.query.id);
+    console.log('id: ' + req.params.id);
     res.status(200).json(result);
   } catch (error) {
     console.log('[ORDER-SERVICE] getOrder error: '+ error);
@@ -45,7 +45,7 @@ const getOrder = async (req: Request, res: Response) => {
 
 const getUserOrder = async (req: Request, res: Response) => {
   try {
-    const filter = {idClient: (String)(req.query.idClient)};
+    const filter = {idClient: (String)(req.params.idClient)};
     const result = await Order.find(filter);
     console.log('result: ' + result);
     res.status(200).json(result);
@@ -57,7 +57,7 @@ const getUserOrder = async (req: Request, res: Response) => {
 
 const getRestaurantOrder = async (req: Request, res: Response) => {
   try {
-    const filter = {idRestaurant: (String)(req.query.idRestaurant)};
+    const filter = {idRestaurant: (String)(req.params.idRestaurant)};
     const result = await Order.find(filter);
     console.log('result: ' + result);
     res.status(200).json(result);
