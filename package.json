@@ -33,5 +33,9 @@
     "rabbitmq-client": "^4.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "cesieats-service-types": "^1.0.10",
+    "ci": "^2.3.0"
   }
 }

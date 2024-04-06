@@ -1,13 +1,20 @@
-// import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
+import { IOrder, IOrderItems } from 'cesieats-service-types/order';
 
-// export const accountSchema = new Schema<IAccount>({
-//   id: { type: Number, required: true },
-//   email: { type: String, required: true },
-//   password: { type: String, required: true },
-// });
+const orderSchema = new Schema<IOrder>({
+  idRestaurant: { type: String, required: true },
+  idClient: { type: String, required: true },
+  idDelivery: { type: String, required: true },
+  itemState: { type: Number, required: true },
+});
 
-// export const Account = model<IAccount>('Account', accountSchema);
-import mongoose from 'mongoose';
+const orderItemsSchema = new Schema<IOrderItems>({
+  idOrder: { type: String, required: true },
+  idItem: { type: String, required: true },
+});
+
+export const Order = model<IOrder>('Order', orderSchema);
+export const OrderItems = model<IOrderItems>('OrderItems', orderItemsSchema);
 
 export const connectMongoose = () => {
   mongoose
