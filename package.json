@@ -35,7 +35,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "cesieats-service-types": "^1.0.10",
+    "cesieats-service-types": "^1.0.11",
     "ci": "^2.3.0"
   }
 }
