@@ -17,6 +17,7 @@ class Receivers implements IReceivers {
   }
 
   receiveHelloWorld() {
+    this.channel.assertQueue('hello');
     this.channel.consume('hello', (message: ConsumeMessage | null) => {
       if (message) {
         console.log('Received message:', message.content.toString());
