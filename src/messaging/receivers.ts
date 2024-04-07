@@ -21,6 +21,7 @@ class Receivers implements IReceivers {
     this.channel.consume('hello', (message: ConsumeMessage | null) => {
       if (message) {
         console.log('Received message:', message.content.toString());
+        this.channel.ack(message);
       }
     });
   }
