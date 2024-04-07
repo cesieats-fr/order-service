@@ -28,8 +28,8 @@ class Messaging implements IMessaging {
 
 export async function connectRabbitMQ() {
   const connection = await amqp.connect(`amqp://${process.env.RABBITMQ_URL}`, {
-    username: 'admin',
-    password: 'samtyq-2raxrI-sorrif',
+    username: process.env.RABBITMQ_USERNAME,
+    password: process.env.RABBITMQ_PASSWORD,
   });
   console.log('Connected to RabbitMQ ' + connection);
   const sendChannel = await connection.createChannel();
