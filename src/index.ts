@@ -2,12 +2,14 @@ import express, { Request, Response } from 'express';
 import 'dotenv/config';
 import router from './routers';
 import { connectMongoose } from './database';
+import { connectRabbitMQ } from './messaging';
 
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
 connectMongoose();
+connectRabbitMQ();
 
 app.get('/', (req: Request, res: Response) => {
   res.send('order-service running');
