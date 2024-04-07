@@ -27,6 +27,7 @@ class Messaging implements IMessaging {
 }
 
 export async function connectRabbitMQ() {
+  console.log(`${process.env.RABBITMQ_USERNAME} - ${process.env.RABBITMQ_PASSWORD}`);
   const connection = await amqp.connect(`amqp://${process.env.RABBITMQ_URL}`, {
     username: process.env.RABBITMQ_USERNAME,
     password: process.env.RABBITMQ_PASSWORD,
