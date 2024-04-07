@@ -4,7 +4,7 @@ metadata:
   name: order-service
   namespace: cesieats-services
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -20,13 +20,18 @@ spec:
           env:
           - name: DB_USERNAME
             valueFrom: 
-              secretKeyRef:
-                name: mongo-creds
+              configMapKeyRef:
+                name: mongodb-credentials
                 key: username
+          - name: DB_URL
+            valueFrom: 
+              configMapKeyRef:
+                name: mongodb-credentials
+                key: services-url
           - name: DB_PASSWORD
             valueFrom: 
               secretKeyRef:
-                name: mongo-creds
+                name: mongodb-credentials-secret
                 key: password
           resources:
             limits:
