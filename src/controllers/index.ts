@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { IOrder, IOrderItems } from 'cesieats-service-types/src/order';
-import { Order, OrderItems } from '../database';
+import { IOrder } from 'cesieats-service-types/src/order';
+import { Order } from '../database';
 
 // Ajoute une commande
 const addOrder = async (req: Request, res: Response) => {
-  try{
+  try {
     const order: IOrder = {
       idClient: req.body.idClient,
       idRestaurant: req.body.idRestaurant,
@@ -17,7 +17,7 @@ const addOrder = async (req: Request, res: Response) => {
     res.status(200).json(result);
   } catch (error) {
     console.log('[ORDER-SERVICE] addOrder error: ' + error);
-    res.status(400).json({message: 'an unexpected error occurred'});
+    res.status(400).json({ message: 'an unexpected error occurred' });
   }
 };
 
@@ -29,9 +29,9 @@ const updateOrderState = async (req: Request, res: Response) => {
     console.log('orderState: ' + req.body.orderState);
     console.log('result after update: ' + result);
     res.status(200).json(result);
-  }  catch (error) {
+  } catch (error) {
     console.log('[ORDER-SERVICE] updateOrderState error: ' + error);
-    res.status(400).json({message: 'an unexpected error occurred'});
+    res.status(400).json({ message: 'an unexpected error occurred' });
   }
 };
 
@@ -44,16 +44,16 @@ const getOrder = async (req: Request, res: Response) => {
     res.status(200).json(result);
   } catch (error) {
     console.log('[ORDER-SERVICE] getOrder error: ' + error);
-    res.status(400).json({message: 'an unexpected error occurred'});
+    res.status(400).json({ message: 'an unexpected error occurred' });
   }
 };
 
 // Retourne toutes les commandes grâce à des filtres [idUser, idRestaurant, orderState]
-const getAllOrder = async (req: Request, res: Response) => {
+const getAllOrders = async (req: Request, res: Response) => {
   try {
     const filter = {
-      idUser: (String)(req.query.user),
-      idRestaurant: (String)(req.query.restaurant),
+      idUser: String(req.query.user),
+      idRestaurant: String(req.query.restaurant),
       orderState: req.query.state,
     };
     const result = await Order.find(filter);
@@ -62,7 +62,7 @@ const getAllOrder = async (req: Request, res: Response) => {
     res.status(200).json(result);
   } catch (error) {
     console.log('[ORDER-SERVICE] getAllOrder error: ' + error);
-    res.status(400).json({message: 'an unexpected error occurred'});
+    res.status(400).json({ message: 'an unexpected error occurred' });
   }
 };
 
@@ -75,7 +75,7 @@ const deleteOrder = async (req: Request, res: Response) => {
     res.status(200).json(result);
   } catch (error) {
     console.log('[ORDER-SERVICE] deleteOrder error: ' + error);
-    res.status(400).json({message: 'an unexpected error occurred'});
+    res.status(400).json({ message: 'an unexpected error occurred' });
   }
 };
 
@@ -83,7 +83,7 @@ const controller = {
   addOrder,
   updateOrderState,
   getOrder,
-  getAllOrder,
+  getAllOrders,
   deleteOrder,
 };
 

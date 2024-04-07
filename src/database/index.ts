@@ -17,9 +17,6 @@ export const Order = model<IOrder>('Order', orderSchema);
 export const OrderItems = model<IOrderItems>('OrderItems', orderItemsSchema);
 
 export const connectMongoose = () => {
-  console.log(`connexion: mongodb://${process.env.DB_URL}/`);
-  console.log(`user: ${process.env.DB_USERNAME}`);
-  console.log(`password: ${process.env.DB_PASSWORD}`);
   mongoose
     .connect(`mongodb://${process.env.DB_URL}/`, {
       dbName: 'cesieats-service',

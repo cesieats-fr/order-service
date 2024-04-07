@@ -1,4 +1,4 @@
-import express, { Router, Request, Response } from 'express';
+import express, { Router } from 'express';
 import controller from '../controllers';
 
 const router: Router = express.Router();
@@ -13,7 +13,7 @@ router.post('/updateOrderState', controller.updateOrderState);
 router.get('/getOrder/:id', controller.getOrder);
 
 // Retourne toutes les commandes grâce à des filtres [idUser, idRestaurant, orderState]
-router.get('/getAllOrder', controller.getAllOrder); 
+router.get('/getAllOrders', controller.getAllOrders);
 
 // Supprime une commande
 router.delete('/deleteOrder', controller.deleteOrder);
