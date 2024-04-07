@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { IOrder, IOrderItems } from 'cesieats-service-types/src/order';
 import { Order, OrderItems } from '../database';
 
+// Ajoute une commande
 const addOrder = async (req: Request, res: Response) => {
   try{
     const order: IOrder = {
@@ -20,6 +21,7 @@ const addOrder = async (req: Request, res: Response) => {
   }
 };
 
+// Change l'état d'une commande [Waiting=0, GoingToRestaurant=1, Delivering=2, Delivered=3]
 const updateOrderState = async (req: Request, res: Response) => {
   try {
     const update = { orderState: req.body.orderState };
@@ -33,6 +35,7 @@ const updateOrderState = async (req: Request, res: Response) => {
   }
 };
 
+// Retourne une commande
 const getOrder = async (req: Request, res: Response) => {
   try {
     const result = await Order.findById(req.params.id);
@@ -45,6 +48,7 @@ const getOrder = async (req: Request, res: Response) => {
   }
 };
 
+// Retourne toutes les commandes grâce à des filtres [idUser, idRestaurant, orderState]
 const getAllOrder = async (req: Request, res: Response) => {
   try {
     const filter = {
@@ -62,6 +66,7 @@ const getAllOrder = async (req: Request, res: Response) => {
   }
 };
 
+// Supprime une commande
 const deleteOrder = async (req: Request, res: Response) => {
   try {
     const result = await Order.findByIdAndDelete(req.body.id);
