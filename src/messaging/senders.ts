@@ -9,7 +9,6 @@ class Senders implements ISenders {
 
   constructor(channel: Channel) {
     this.channel = channel;
-    this.sendHelloWorld();
   }
 
   async sendHelloWorld() {

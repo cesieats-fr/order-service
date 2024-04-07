@@ -16,17 +16,10 @@ const orderItemsSchema = new Schema<IOrderItems>({
 export const Order = model<IOrder>('Order', orderSchema);
 export const OrderItems = model<IOrderItems>('OrderItems', orderItemsSchema);
 
-export const connectMongoose = () => {
-  mongoose
-    .connect(`mongodb://${process.env.DB_URL}/`, {
-      dbName: 'cesieats-service',
-      user: process.env.DB_USERNAME,
-      pass: process.env.DB_PASSWORD,
-    })
-    .then(() => {
-      console.log('Connected to the database');
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+export async function connectMongoose() {
+  return await mongoose.connect(`mongodb://${process.env.DB_URL}/`, {
+    dbName: 'cesieats-service',
+    user: process.env.DB_USERNAME,
+    pass: process.env.DB_PASSWORD,
+  });
+}

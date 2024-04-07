@@ -9,14 +9,19 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 connectMongoose();
+
 connectRabbitMQ();
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('order-service running');
-});
+Promise.all([connectMongoose(), connectRabbitMQ()]).then((messaging) => {
+  console.log(messaging);
 
-app.use('/', router);
+  app.get('/', (req: Request, res: Response) => {
+    res.send('order-service running');
+  });
 
-app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+  app.use('/', router);
+
+  app.listen(port, () => {
+    console.log(`Server started at http://localhost:${port}`);
+  });
 });
