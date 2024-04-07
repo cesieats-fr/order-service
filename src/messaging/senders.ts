@@ -13,7 +13,7 @@ class Senders implements ISenders {
 
   async sendHelloWorld() {
     await this.channel.assertQueue('hello');
-    await this.channel.sendToQueue('hello', Buffer.from('Hello, World!'));
+    this.channel.sendToQueue('hello', Buffer.from('Hello, World from order!'));
   }
 
   disconnect() {
