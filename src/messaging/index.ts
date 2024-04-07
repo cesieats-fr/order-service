@@ -38,6 +38,8 @@ export async function connectRabbitMQ() {
   const channel = await connection.createChannel();
   const receivers = new Receivers(channel);
   const senders = new Senders(channel);
+  receivers.receiveHelloWorld();
+  senders.sendHelloWorld();
   return new Messaging(connection, channel, senders, receivers);
 }
 

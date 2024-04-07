@@ -11,8 +11,9 @@ class Senders implements ISenders {
     this.channel = channel;
   }
 
-  sendHelloWorld() {
-    this.channel.sendToQueue('hello', Buffer.from('Hello, World!'));
+  async sendHelloWorld() {
+    await this.channel.assertQueue('hello');
+    await this.channel.sendToQueue('hello', Buffer.from('Hello, World!'));
   }
 
   disconnect() {
