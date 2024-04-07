@@ -2,6 +2,8 @@ import * as amqp from 'amqplib';
 import Senders from './senders';
 import Receivers from './receivers';
 
+export let messaging: Messaging;
+
 interface IMessaging {
   connection: amqp.Connection;
   senders: Senders;
@@ -34,11 +36,11 @@ export async function connectRabbitMQ() {
     username: process.env.RABBITMQ_USERNAME,
     password: process.env.RABBITMQ_PASSWORD,
   });
-  console.log('Connected to RabbitMQ ');
   const channel = await connection.createChannel();
   const receivers = new Receivers(channel);
   const senders = new Senders(channel);
-  return new Messaging(connection, channel, senders, receivers);
+  messaging = new Messaging(connection, channel, senders, receivers);
+  console.log('Connected to RabbitMQ ');
 }
 
 export default Messaging;

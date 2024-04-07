@@ -8,9 +8,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
-Promise.all([connectMongoose(), connectRabbitMQ()]).then((messaging) => {
-  console.log(messaging);
-
+Promise.all([connectRabbitMQ(), connectMongoose()]).then(() => {
   app.get('/', (req: Request, res: Response) => {
     res.send('order-service running');
   });

@@ -17,9 +17,10 @@ export const Order = model<IOrder>('Order', orderSchema);
 export const OrderItems = model<IOrderItems>('OrderItems', orderItemsSchema);
 
 export async function connectMongoose() {
-  return await mongoose.connect(`mongodb://${process.env.DB_URL}/`, {
+  await mongoose.connect(`mongodb://${process.env.DB_URL}/`, {
     dbName: 'cesieats-service',
     user: process.env.DB_USERNAME,
     pass: process.env.DB_PASSWORD,
   });
+  console.log('Connected to MongoDB ');
 }
