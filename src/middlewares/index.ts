@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-
 import jwt from 'jsonwebtoken';
 
 export const middleware: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
