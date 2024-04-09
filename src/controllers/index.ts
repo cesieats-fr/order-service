@@ -10,6 +10,13 @@ const addOrder = async (req: Request, res: Response) => {
       idRestaurant: req.body.idRestaurant,
       orderState: 0,
       idDelivery: req.body.idDelivery ?? null,
+      price: req.body.price,
+      clientName: req.body.clientName,
+      clientAddress: req.body.clientAddress,
+      restaurantName: req.body.restaurantName,
+      restaurantAddress: req.body.restaurantAddress,
+      restaurantTelephone: req.body.restaurantTelephone,
+      idAccountRestaurant: req.body.idAccountRestaurant,
     };
     const result = await Order.create(order);
     res.status(200).json(result);
@@ -40,14 +47,18 @@ const getOrder = async (req: Request, res: Response) => {
 };
 
 // Retourne toutes les commandes grâce à des filtres [idUser, idRestaurant, orderState]
-const getAllOrders = async (req: Request, res: Response) => {
+const getAllClientOrders = async (req: Request, res: Response) => {
   try {
-    const filter = {
-      idUser: String(req.query.user),
-      idRestaurant: String(req.query.restaurant),
-      orderState: req.query.state,
-    };
-    const result = await Order.find(filter);
+    const result = await Order.find({ idClient: res.locals.account._id }).exec();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: 'an unexpected error occurred' });
+  }
+};
+
+const getAllRestaurantOrders = async (req: Request, res: Response) => {
+  try {
+    const result = await Order.find({ idAccountRestaurant: res.locals.account._id }).exec();
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred' });
@@ -68,7 +79,8 @@ const controller = {
   addOrder,
   updateOrderState,
   getOrder,
-  getAllOrders,
+  getAllClientOrders,
+  getAllRestaurantOrders,
   deleteOrder,
 };
 

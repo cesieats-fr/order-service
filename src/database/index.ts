@@ -3,11 +3,16 @@ import { IOrder, IOrderItems } from 'cesieats-service-types/src/order';
 
 const orderSchema = new Schema<IOrder>({
   idRestaurant: { type: String, required: true },
+  idAccountRestaurant: { type: String, required: true },
   idClient: { type: String, required: true },
   idDelivery: { type: String, required: false },
   orderState: { type: Number, required: true },
   price: { type: Number, required: false },
-  deliveryEarning: { type: Number, required: false },
+  clientName: { type: String, required: true },
+  clientAddress: { type: String, required: true },
+  restaurantName: { type: String, required: true },
+  restaurantAddress: { type: String, required: true },
+  restaurantTelephone: { type: String, required: true },
 });
 
 const orderItemsSchema = new Schema<IOrderItems>({

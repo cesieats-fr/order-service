@@ -1,7 +1,10 @@
 import express, { Router } from 'express';
 import controller from '../controllers';
+import { middleware } from '../middlewares';
 
 const router: Router = express.Router();
+
+router.use(middleware);
 
 // Ajoute une commande
 router.post('/addOrder', controller.addOrder);
@@ -13,7 +16,9 @@ router.post('/updateOrderState', controller.updateOrderState);
 router.get('/getOrder/:id', controller.getOrder);
 
 // Retourne toutes les commandes grâce à des filtres [idUser, idRestaurant, orderState]
-router.get('/getAllOrders', controller.getAllOrders);
+router.get('/getAllClientOrders', controller.getAllClientOrders);
+
+router.get('/getAllRestaurantOrders', controller.getAllRestaurantOrders);
 
 // Supprime une commande
 router.delete('/deleteOrder', controller.deleteOrder);
