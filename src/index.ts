@@ -4,7 +4,7 @@ import router from './routers';
 import { connectMongoose } from './database';
 import { connectRabbitMQ } from './messaging';
 
-const app = express();
+const app = express().use('*', cors());
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
