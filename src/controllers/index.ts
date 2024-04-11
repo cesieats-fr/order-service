@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IOrder } from 'cesieats-service-types/src/order';
+import { IOrder, OrderState } from 'cesieats-service-types/src/order';
 import { Order } from '../database';
 
 // Ajoute une commande
@@ -49,7 +49,12 @@ const getOrder = async (req: Request, res: Response) => {
 // Retourne toutes les commandes grâce à des filtres [idUser, idRestaurant, orderState]
 const getAllClientOrders = async (req: Request, res: Response) => {
   try {
-    const result = await Order.find({ idClient: res.locals.account._id }).exec();
+    const filter = {
+      idClient: res.locals.account._id,
+      OrderState: req.query.orderState,
+    };
+
+    const result = await Order.find(filter).exec();
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred' });
