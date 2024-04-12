@@ -47,7 +47,7 @@ const addOrderMenus = async (req: Request, res: Response) => {
 const updateOrderState = async (req: Request, res: Response) => {
   try {
     const update = { orderState: req.body.orderState };
-    const result = await Order.findByIdAndUpdate(req.body.id, update);
+    const result = await Order.findByIdAndUpdate(req.body.id, update, { new: true });
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred' });
