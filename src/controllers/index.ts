@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
-import { IOrder, OrderState } from 'cesieats-service-types/src/order';
+import { IOrder } from 'cesieats-service-types/src/order';
 import { Order } from '../database';
 
 // Ajoute une commande
 const addOrder = async (req: Request, res: Response) => {
   try {
     const order: IOrder = {
-      idClient: req.body.idClient,
+      idClient: res.locals.account._id,
       idRestaurant: req.body.idRestaurant,
       orderState: 0,
       idDelivery: req.body.idDelivery ?? null,
       price: req.body.price,
-      clientName: req.body.clientName,
-      clientAddress: req.body.clientAddress,
+      clientName: res.locals.account.name,
+      clientAddress: res.locals.account.address,
       restaurantName: req.body.restaurantName,
       restaurantAddress: req.body.restaurantAddress,
       restaurantTelephone: req.body.restaurantTelephone,
