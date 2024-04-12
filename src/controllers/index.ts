@@ -36,7 +36,10 @@ const addOrderItems = async (req: Request, res: Response) => {
 
 const addOrderMenus = async (req: Request, res: Response) => {
   try {
+    console.log('addOrderMenus, req.body : ', req.body);
+    console.log('addOrderMenus, req.body.orderMenus : ', req.body.orderMenus);
     const result = await OrderMenus.createCollection(req.body.orderMenus);
+    console.log(result);
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred' });
