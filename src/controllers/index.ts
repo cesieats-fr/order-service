@@ -98,6 +98,19 @@ const deleteOrder = async (req: Request, res: Response) => {
   }
 };
 
+const linkDelivery = async (req: Request, res: Response) => {
+  try {
+    const result = await Order.findOneAndUpdate(
+      { _id: req.body.orderId },
+      { idDelivery: req.body.deliveryId },
+      { new: true },
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: 'an unexpected error occurred' });
+  }
+};
+
 const controller = {
   addOrder,
   updateOrderState,
@@ -107,6 +120,7 @@ const controller = {
   deleteOrder,
   addOrderItems,
   addOrderMenus,
+  linkDelivery,
 };
 
 export default controller;

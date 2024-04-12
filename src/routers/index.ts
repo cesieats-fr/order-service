@@ -27,4 +27,6 @@ router.post('/addOrderItems', controller.addOrderItems);
 
 router.post('/addOrderMenus', controller.addOrderMenus);
 
+router.post('/linkDelivery', controller.linkDelivery);
+
 export default router;
