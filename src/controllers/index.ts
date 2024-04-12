@@ -19,9 +19,11 @@ const addOrder = async (req: Request, res: Response) => {
       idAccountRestaurant: req.body.idAccountRestaurant,
     };
     const result = await Order.create(order);
+    console.log(result);
+
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ message: 'an unexpected error occurred' });
+    res.status(400).json({ message: 'an unexpected error occurred', error });
   }
 };
 
