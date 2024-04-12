@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose';
-import { IOrder, IOrderItems } from 'cesieats-service-types/src/order';
+import { IOrder, IOrderItems, IOrderMenus } from 'cesieats-service-types/src/order';
 
 const orderSchema = new Schema<IOrder>({
   idRestaurant: { type: String, required: true },
@@ -20,8 +20,14 @@ const orderItemsSchema = new Schema<IOrderItems>({
   idItem: { type: String, required: true },
 });
 
+const orderMenusSchema = new Schema<IOrderMenus>({
+  idOrder: { type: String, required: true },
+  idMenu: { type: String, required: true },
+});
+
 export const Order = model<IOrder>('Order', orderSchema);
 export const OrderItems = model<IOrderItems>('OrderItems', orderItemsSchema);
+export const OrderMenus = model<IOrderMenus>('OrderMenus', orderMenusSchema);
 
 export async function connectMongoose() {
   await mongoose.connect(`mongodb://${process.env.DB_URL}/`, {

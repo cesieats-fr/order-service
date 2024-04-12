@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IOrder } from 'cesieats-service-types/src/order';
-import { Order } from '../database';
+import { Order, OrderItems, OrderMenus } from '../database';
 
 // Ajoute une commande
 const addOrder = async (req: Request, res: Response) => {
@@ -19,6 +19,24 @@ const addOrder = async (req: Request, res: Response) => {
       idAccountRestaurant: req.body.idAccountRestaurant,
     };
     const result = await Order.create(order);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: 'an unexpected error occurred' });
+  }
+};
+
+const addOrderItems = async (req: Request, res: Response) => {
+  try {
+    const result = await OrderItems.createCollection(req.body.orderItems);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: 'an unexpected error occurred' });
+  }
+};
+
+const addOrderMenus = async (req: Request, res: Response) => {
+  try {
+    const result = await OrderMenus.createCollection(req.body.orderMenus);
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred' });
@@ -87,6 +105,8 @@ const controller = {
   getAllClientOrders,
   getAllRestaurantOrders,
   deleteOrder,
+  addOrderItems,
+  addOrderMenus,
 };
 
 export default controller;

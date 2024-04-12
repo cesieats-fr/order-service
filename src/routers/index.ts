@@ -23,4 +23,8 @@ router.get('/getAllRestaurantOrders', controller.getAllRestaurantOrders);
 // Supprime une commande
 router.delete('/deleteOrder', controller.deleteOrder);
 
+router.post('/addOrderItems', controller.addOrderItems);
+
+router.post('/addOrderMenus', controller.addOrderMenus);
+
 export default router;
