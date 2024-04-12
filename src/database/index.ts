@@ -18,11 +18,13 @@ const orderSchema = new Schema<IOrder>({
 const orderItemsSchema = new Schema<IOrderItems>({
   idOrder: { type: String, required: true },
   idItem: { type: String, required: true },
+  amount: { type: Number, required: true },
 });
 
 const orderMenusSchema = new Schema<IOrderMenus>({
   idOrder: { type: String, required: true },
   idMenu: { type: String, required: true },
+  amount: { type: Number, required: true },
 });
 
 export const Order = model<IOrder>('Order', orderSchema);
